@@ -21,15 +21,19 @@ body {
   margin: auto;
 }
 
+
+
 .header {
   height: var(--tamanho-header);
-  border-bottom: 2px solid #32b9cd;
+  border-bottom: 1px solid rgba(50, 185, 205, 0.3); 
+  backdrop-filter: blur(10px); 
 }
 
 .header .container {
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  padding: 0 20px; 
 }
 
 .header a {
@@ -37,18 +41,40 @@ body {
   color: #e3b062;
 }
 
-.agora {
-  font-weight: 800;
+.logo-bola {
+  width: 30px;
+  margin-right: 10px;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 5px #32b9cd);
 }
 
 .navbar {
-  width: 300px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 25px; 
   list-style: none;
   color: #e3b062;
 }
+
+.navbar li {
+  list-style: none;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #e3b062;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  background-color: rgba(50, 185, 205, 0.2);
+  color: #32b9cd;
+}
+
 
 .titulo {
   color: #32b9cd;
@@ -60,12 +86,13 @@ body {
   margin: 0;
 }
 
-/* BANNER */
+
+
 
 .banner {
   height: var(--tamanho-banner);
   color: white;
-  background-image: url('../assets/imgs/bg-jelly-fish-para-home.png');
+  background-image: url('');
   background-size: cover;
 }
 
@@ -80,13 +107,13 @@ body {
   margin: 0;
   padding: 0;
   font-size: 36px;
+  text-align: center;
 }
 
 .banner .container span {
   font-weight: 800;
 }
 
-/* MISSÃO VISÃO VALORES */
 
 .social {
   background-color: #e5e5e5;
@@ -118,7 +145,6 @@ body {
   align-items: center;
 }
 
-/* FOOTER */
 
 .footer {
   background-color: #32b9cd;
@@ -137,7 +163,6 @@ body {
   font-size: 12px;
 }
 
-/* LOGIN */
 
 .login {
   height: var(--tamanho-login);
@@ -221,142 +246,3 @@ body {
   margin-top: 20px;
 }
 
-.loading-div {
-  width: 50px;
-  display: none;
-}
-
-.loading-div img {
-  height: 50px;
-  width: 50px;
-}
-
-#div_erros_login {
-  display: none
-}
-
-/* FORMULARIO */
-
-.alerta_erro{
-  display: flex;
-  justify-content: flex-end;
-}
-
-.card_erro {
-  display: none;
-  background-color: #fff;
-  color: black;
-  width: 230px;
-  position: fixed;
-  border-radius: 4px;
-  border: #ED145B 3px solid;
-  padding: 10px;
-  margin-right: 10%;
-}
-
-.card_erro #mensagem_erro{
-  font-weight: 500;
-  font-size: 20px;
-}
-
-.formulario .tipo_campo {
-  font-size: 20px;
-  font-weight: 600 !important;
-}
-
-.formulario {
-  display: flex;
-  flex-direction: column;
-}
-
-input {
-  margin-bottom: 10px;
-  border: 2px solid #32b9cd;
-  padding: 10px;
-  text-align: center;
-  border-radius: 10px;
-}
-
-.btn {
-  font-family: "Barlow", sans-serif;
-  border: 0;
-  border-radius: 5px;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 10px 15px;
-  color: white;
-  background-color: #ED145B;
-  width: 120px;
-  align-self: center;
-  margin-top: 5px;
-}
-
-.loading-div {
-  width: 50px;
-  margin: auto;
-  display: none;
-}
-
-.loading-div img {
-  height: 50px;
-  width: 50px;
-}
-
-/* SIMULADOR */
-
-.simulador {
-  color: white;
-}
-
-.simulador .container {
-  flex-direction: column;
-  overflow: scroll; 
-  height: var(--tamanho-simulador);
-}
-
-/* ALERTA */
-
-#alerta {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-
-.mensagem-alarme {
-  background-color: white;
-  border-radius: 5px;
-  width: 300px;
-  height: 80px;
-  margin: 10px;
-  padding: 10px 0;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.mensagem-alarme h3 {
-  font-size: 14px;
-  margin: 0;
-}
-
-.mensagem-alarme .informacao {
-  width: 66%;
-}
-
-.alarme-sino {
-  width: 48px;
-  height: 48px;
-  animation-name: bell;
-  animation-duration: 4s;
-  background-image: url('https://cdn-icons-png.flaticon.com/512/1157/1157000.png');
-  background-size: cover;
-  animation-iteration-count: infinite;
-}
-
-@keyframes bell {
-  0%   {transform: rotate(25deg)}
-  25%  {transform: rotate(-25deg)}
-  50%  {transform: rotate(25deg)}
-  75%  {transform: rotate(-25deg)}
-  100% {transform: rotate(25deg)}
-}
