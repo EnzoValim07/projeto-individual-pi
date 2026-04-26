@@ -22,7 +22,6 @@ body {
 }
 
 
-
 .header {
   height: var(--tamanho-header);
   border-bottom: 1px solid rgba(50, 185, 205, 0.3); 
@@ -87,7 +86,8 @@ body {
 
 
 .banner {
-  height: var(--tamanho-banner);
+  min-height: 100vh;
+  display: flex;
   color: white;
   background-image: url('../assets/imgs/banner.png');
   background-size: cover;
@@ -97,9 +97,8 @@ body {
 }
 
 .banner .container {
-  justify-content: center;
-  align-items: center;
   height: 100%;
+  align-items: center;
 }
 
 .banner .container p {
@@ -140,6 +139,7 @@ body {
 }
 
 .sobre {
+  display: flex;
   background-color: white;
   color: white;
   padding: 60px 0;
@@ -154,13 +154,19 @@ body {
 }
 
 .sobre-texto {
+  margin-top: -90px;
   width: 60%;
+  padding-top: 0px;
 }
 
 .sobre-texto h1 {
+  display: flex;
+  width: 100%;
+  padding-top: 0%;
   font-size: 70px;
   margin-bottom: 20px;
   color: #d4b62c;
+  text-align: center;
 }
 
 .sobre-texto p {
@@ -176,34 +182,85 @@ body {
   border-radius: 10px;
 }
 
-.social {
-  background-color: #06052c;
-  display: flex;
-}
-
-.social .container {
-  justify-content: center;
-}
-
-.box img {
-  width: 170px;
-}
-
-.social .container .boxes {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 30px 0;
-}
-
-.social p {
+.trajetoria {
+  background: linear-gradient(90deg, #0a0f1f, #0d1b2a);
+  padding: 80px 0;
+  color: white;
   text-align: center;
 }
 
-.box {
+.titulo-trajetoria {
+  margin-right: 0px;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+.linha {
+  position: relative;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #aaa;
+  
+}
+
+.etapas {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  width: 80%;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+
+.etapas::before {
+  content: "";
+  position: absolute;
+  top: 30px; 
+  left: 0;
+  right: 0; 
+  width: auto; 
+  height: 2px;
+  background-color: #aaa;
+  z-index: 0;
+}
+
+
+.etapa {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+}
+
+.icone {
+  position: relative;
+  z-index: 2;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #0a0f1f;
+  border: 2px solid #d4b62c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.etapa h3 {
+  color: #d4b62c;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.etapa p {
+  font-size: 13px;
+  color: #ccc;
 }
 
 .texto {
@@ -212,24 +269,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
-.footer {
-  background-color: #32b9cd;
-  height: 150px;
-  color: #fff;
-  display: flex;
-  font-size: 15px;
-}
-
-.footer .container {
-  justify-content: center;
-  text-align: center;
-}
-
-.footer .container .version {
-  font-size: 12px;
-}
-
 
 .login {
   height: var(--tamanho-login);
