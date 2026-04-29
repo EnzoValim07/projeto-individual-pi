@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Verdana, sans-serif;
   background-color: black;
 }
 
@@ -13,6 +13,7 @@ body {
   --tamanho-simulador: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-footer: 65px;
+  scroll-behavior: smooth;
 }
 
 .container {
@@ -268,6 +269,113 @@ body {
   color: gray;
   display: flex;
   flex-direction: column;
+}
+
+.momentos {
+  background: linear-gradient(180deg, #000000, #0a0a0a);
+  padding: 80px 0;
+  color: white;
+}
+
+.momentos-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.momentos-left {
+  width: 55%;
+}
+
+.momentos-left h2 {
+  font-size: 22px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.momentos-left h2::after {
+  content: "";
+  width: 40px;
+  height: 3px;
+  background-color: #d4b62c;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+}
+
+.card-momento {
+  text-align: center;
+}
+
+.card-momento img {
+  width: 180px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #d4b62c;
+}
+
+.card-momento p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.momentos-right {
+  width: 45%;
+}
+
+.momentos-right h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.momentos-right p {
+  color: #ccc;
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.destaque {
+  margin-top: 20px;
+  border: 2px solid #d4b62c;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.destaque p {
+  color: #d4b62c;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.footer-clean {
+  background-color: white;
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+}
+
+.footer-clean .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-left h2 {
+  margin: 0;
+  color: #d4b62c; 
+  font-weight: 700;
+}
+
+.footer-right p {
+  margin: 0;
+  color: black;
+  font-weight: 500;
 }
 
 .login {
