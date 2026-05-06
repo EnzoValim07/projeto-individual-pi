@@ -46,13 +46,15 @@
       <div class="card card-cadastro">
         <h2>Bem-vindo!</h2>
         <div class="formulario">
-          <!--
-                         Para inserir mais um campo, copie uma das inputs abaixo.
-                         Assim que inserir vá para o script abaixo.
-                     -->
           <div class="campo">
             <span>Nome:</span>
             <input id="nome_input" type="text" placeholder="Seu nome" />
+          </div>
+          <div class="campo">
+            <span>Você já conhecia o Handebol?</span>
+            <select id="conhece_handebol" name="conhece">
+              <option value="">Selecione...</option>
+            </select>
           </div>
           <div class="campo">
             <span>E-mail:</span>
@@ -91,22 +93,34 @@
 
 <script>
 
-  function cadastrar() {
-    // aguardar();
+  function listar() {
+    fetch('/respostas/listar')
+      .then(res => res.json())
+      .then(opcoes => {
+        const select = document.getElementById('conhece_handebol');
+        opcoes.forEach(opcao => {
+          const option = document.createElement('option');
+          option.value = opcao.id_resposta;
+          option.textContent = opcao.descricao;
+          select.appendChild(option);
+        });
+      });
+  }
 
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
+  function cadastrar() {
     var nomeVar = nome_input.value;
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
+    var conheceVar = document.getElementById('conhece_handebol').value;
 
     // Verificando se há algum campo em branco
     if (
       nomeVar == "" ||
       emailVar == "" ||
       senhaVar == "" ||
-      confirmacaoSenhaVar == ""
+      confirmacaoSenhaVar == "" ||
+      conheceVar == ""  
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
@@ -118,19 +132,17 @@
       setInterval(sumirMensagem, 5000);
     }
 
-
-    // Enviando o valor da nova input
+  
     fetch("/usuarios/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
         emailServer: emailVar,
-        senhaServer: senhaVar
+        senhaServer: senhaVar,
+        conheceServer: conheceVar
       }),
     })
       .then(function (resposta) {
@@ -160,8 +172,8 @@
     return false;
   }
 
- 
   function sumirMensagem() {
     cardErro.style.display = "none";
   }
+
 </script>
