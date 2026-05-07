@@ -28,6 +28,15 @@ CREATE TABLE respostaInicial (
 INSERT INTO respostaInicial (descricao) VALUES ('Sim');
 INSERT INTO respostaInicial (descricao) VALUES ('Não');
 
+CREATE TABLE resultado_quiz (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    acertos INT,
+    erros INT,
+    pontuacao INT,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fk_usuario INT,
+    CONSTRAINT fk_usuario_resultado FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+);
 
 
 select * from usuario;

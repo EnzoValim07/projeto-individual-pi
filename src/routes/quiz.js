@@ -11,4 +11,8 @@ router.get("/listar", function (req, res) {
     quizController.listar(req, res);
 });
 
+router.get("/verificar/:idUsuario", function (req, res) {
+    quizController.verificar(req, res);
+});
+
 module.exports = router;

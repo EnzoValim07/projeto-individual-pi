@@ -28,7 +28,21 @@ function listar() {
     return database.executar(instrucaoSql);
 }
 
+
+function verificar(idUsuario) {
+    console.log("ACESSEI O QUIZ MODEL - function verificar(): ", idUsuario);
+
+    var instrucaoSql = `
+        SELECT id FROM resultado_quiz
+        WHERE fk_usuario = ${idUsuario}
+        LIMIT 1;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     salvar,
-    listar
+    listar,
+    verificar
 };

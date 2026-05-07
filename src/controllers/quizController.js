@@ -43,7 +43,32 @@ function listar(req, res) {
         });
 }
 
+function verificar(req, res) {
+    var idUsuario = req.params.idUsuario;
+
+    if (idUsuario == undefined) {
+        res.status(400).send("O id do usuário está undefined!");
+    } else {
+        quizModel.verificar(idUsuario)
+            .then(function (resultado) {
+                if (resultado.length > 0) {
+                
+                    res.status(200).json({ jaFez: true });
+                } else {
+                    
+                    res.status(200).json({ jaFez: false });
+                }
+            })
+            .catch(function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao verificar o quiz: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            });
+    }
+}
+
 module.exports = {
     salvar,
-    listar
+    listar,
+    verificar
 };

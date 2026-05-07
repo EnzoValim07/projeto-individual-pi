@@ -96,7 +96,6 @@
     </div>
 
     <!--footer inicio-->
-
     <div class="footer">
         <div class="container">
             <h4>Feito com amor por aluno &hearts; SPTech &copy; 2026</h4>
@@ -165,6 +164,30 @@
     function onloadEsconder() {
         document.getElementById('pontuacao').style.display = "none"
         document.getElementById('jogo').style.display = "none"
+
+        var idUsuario = sessionStorage.getItem("ID_USUARIO")
+
+        if (!idUsuario) {
+            alert("Você precisa estar logado para acessar o quiz!")
+            window.location.href = "login.html"
+            return
+        }
+
+        fetch("/quiz/verificar/" + idUsuario)
+            .then(function (resposta) {
+                return resposta.json()
+            })
+            .then(function (dados) {
+                if (dados.jaFez) {
+                    
+                    alert("Você já realizou o quiz! Redirecionando para o dashboard...")
+                    window.location.href = "./dashboard/cards.html"
+                }
+                
+            })
+            .catch(function (erro) {
+                console.log("Erro ao verificar quiz: ", erro)
+            })
     }
 
     function iniciarQuiz() {
@@ -316,12 +339,10 @@
         btnSubmeter.disabled = true
         btnTentarNovamente.disabled = false
 
-        // Salva o resultado no banco vinculado ao usuário logado
         salvarResultado()
     }
 
     function salvarResultado() {
-        // Recupera o id do usuário salvo na sessão (sessao.js)
         var idUsuario = sessionStorage.getItem("ID_USUARIO")
 
         if (!idUsuario) {
