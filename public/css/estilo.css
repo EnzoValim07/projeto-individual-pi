@@ -585,3 +585,221 @@ input {
   75%  {transform: rotate(-25deg)}
   100% {transform: rotate(25deg)}
 }
+
+/* ==================== QUIZ ==================== */
+
+.quiz-wrapper {
+  min-height: var(--tamanho-login);
+  background-image: url('../assets/imgs/wallpaperLogin.png');
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.card-quiz {
+  background-color: #e5e5e5;
+  border-radius: 12px;
+  width: 60%;
+  padding: 30px 40px;
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card-quiz h2 {
+  color: #d4b62c;
+  font-size: 28px;
+  margin: 0;
+}
+
+.card-quiz p {
+  margin: 0;
+  color: #555;
+  font-size: 15px;
+}
+
+/* Placar de acertos/erros */
+#pontuacao {
+  display: flex;
+  flex-direction: row !important;
+  gap: 30px;
+  background-color: #fff;
+  border-left: 4px solid #d4b62c;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 14px;
+  color: #333;
+}
+
+#pontuacaoDuranteJogo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#pontuacaoFinalJogo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-left: 2px solid #ddd;
+  padding-left: 20px;
+}
+
+#spanPontuacaoFinal {
+  font-weight: 700;
+  color: #d4b62c;
+}
+
+/* Área do jogo */
+#jogo {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-left: 4px solid #d4b62c;
+}
+
+#infoQuestao {
+  font-size: 13px;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#spanQuestaoExibida {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.5;
+}
+
+#infoAlternativas {
+  font-size: 13px;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Opções de resposta */
+#opcoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#opcoes span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f5f5f5;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+#opcoes span:hover {
+  border-color: #d4b62c;
+  background-color: #fffbee;
+}
+
+#opcoes input[type="radio"] {
+  accent-color: #d4b62c;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  flex-shrink: 0;
+}
+
+#opcoes label {
+  font-size: 15px;
+  color: #333;
+  cursor: pointer;
+  margin: 0;
+}
+
+/* Botões do quiz */
+#botoes {
+  display: flex;
+  flex-direction: row !important;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#botoes button {
+  cursor: pointer;
+  font-family: "Barlow", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  background-color: #d4b62c;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  width: auto;
+  height: auto;
+  margin: 0;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+#botoes button:hover:not(:disabled) {
+  background-color: #b89a20;
+}
+
+#botoes button:disabled {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* Botão iniciar */
+#btnIniciarQuiz {
+  width: 160px !important;
+  height: 44px !important;
+  font-size: 15px !important;
+  align-self: flex-start;
+  margin-top: 0 !important;
+}
+
+/* Cores de feedback */
+.text-success-with-bg {
+  color: #095c36 !important;
+  background-color: #9dd3ba !important;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.text-warning-with-bg {
+  color: #705400 !important;
+  background-color: #fdebb3 !important;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.text-danger-with-bg {
+  color: #990c19 !important;
+  background-color: #f0c1c6 !important;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.text-new-gray {
+  color: #aaa !important;
+}
+
+/* Mensagem final */
+#msgFinal {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 8px;
+  width: fit-content;
+}

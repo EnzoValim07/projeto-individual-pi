@@ -18,7 +18,6 @@
 <body>
 
     <!--Header-->
-
     <div class="header">
         <div class="container">
             <h1 class="titulo"><img src="assets\imgs\861512.png" class="logo-bola">Handebol</h1>
@@ -36,7 +35,6 @@
             </ul>
         </div>
     </div>
-
 
     <div class="login">
         <div class="alerta_erro">
@@ -102,8 +100,7 @@
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
             finalizarAguardar();
             return false;
-        }
-        else {
+        } else {
             setInterval(sumirMensagem, 5000)
         }
 
@@ -133,15 +130,13 @@
                     sessionStorage.ID_USUARIO = json.id;
 
                     setTimeout(function () {
-                        window.location.href = "./dashboard/cards.html";
-                    }, 1000); // apenas para exibir o loading
+                        window.location.href = "quiz.html";
+                    }, 1000);
 
                 });
 
             } else {
-
                 console.log("Houve um erro ao tentar realizar o login!");
-
                 resposta.text().then(texto => {
                     console.error(texto);
                     finalizarAguardar(texto);
