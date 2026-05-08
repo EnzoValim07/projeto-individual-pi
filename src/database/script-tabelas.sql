@@ -10,6 +10,10 @@ CREATE DATABASE handebol;
 
 USE handebol;
 
+CREATE TABLE respostaInicial (
+	id_resposta INT PRIMARY KEY AUTO_INCREMENT,
+    descricao VARCHAR(50)
+);
 
 CREATE TABLE usuario (
 	id INT PRIMARY KEY AUTO_INCREMENT,
@@ -18,11 +22,6 @@ CREATE TABLE usuario (
 	senha VARCHAR(50),
     conhece INT,
     constraint fk_conhece FOREIGN KEY (conhece) REFERENCES respostaInicial(id_resposta)
-);
-
-CREATE TABLE respostaInicial (
-	id_resposta INT PRIMARY KEY AUTO_INCREMENT,
-    descricao VARCHAR(50)
 );
 
 INSERT INTO respostaInicial (descricao) VALUES ('Sim');
@@ -44,3 +43,5 @@ select * from usuario;
 SELECT u.nome, u.email, r.descricao AS conhece_handebol
 FROM usuario u
 JOIN respostaInicial r ON u.conhece = r.id_resposta;
+
+select * from resultado_quiz;
