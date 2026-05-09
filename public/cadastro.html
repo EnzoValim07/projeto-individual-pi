@@ -82,7 +82,7 @@
   <!--footer inicio-->
   <div class="footer">
     <div class="container">
-      <p style="color: white;">Feito com amor por Enzo Valim&hearts; SPTech &copy; 2026</p>
+      <h4>Feito com amor por aluno &hearts; SPTech &copy; 2026</h4>
       <span class="version">v1.0.0</span>
     </div>
   </div>
@@ -114,25 +114,21 @@
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
     var conheceVar = document.getElementById('conhece_handebol').value;
 
-    // Verificando se há algum campo em branco
     if (
       nomeVar == "" ||
       emailVar == "" ||
       senhaVar == "" ||
       confirmacaoSenhaVar == "" ||
-      conheceVar == ""  
+      conheceVar == ""
     ) {
       cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
-
+      mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
       finalizarAguardar();
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
     }
 
-  
     fetch("/usuarios/cadastrar", {
       method: "POST",
       headers: {
@@ -149,14 +145,20 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
+          resposta.json().then(function (json) {
+            console.log("Usuário cadastrado: ", json);
 
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+            sessionStorage.ID_USUARIO = json.id;
+            sessionStorage.NOME_USUARIO = json.nome;
+            sessionStorage.EMAIL_USUARIO = json.email;
 
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para o Quiz...";
+
+            setTimeout(() => {
+              window.location = "quiz.html";
+            }, 2000);
+          });
 
           limparFormulario();
           finalizarAguardar();

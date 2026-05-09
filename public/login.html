@@ -69,7 +69,7 @@
     <!--footer inicio-->
     <div class="footer">
         <div class="container">
-            <p style="color: white;">Feito com amor por Enzo Valim &hearts; SPTech &copy; 2026</p>
+            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2026</h4>
             <span class="version">v1.0.0</span>
         </div>
     </div>
@@ -82,7 +82,7 @@
 <script>
 
     var tentativas = [];
-    
+
     function entrar() {
         aguardar();
 
@@ -130,9 +130,8 @@
                     sessionStorage.ID_USUARIO = json.id;
 
                     setTimeout(function () {
-                        window.location.href = "quiz.html";
+                        window.location.href = "./dashboard/cards.html";
                     }, 1000);
-
                 });
 
             } else {
