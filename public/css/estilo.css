@@ -354,8 +354,110 @@ body {
   font-weight: 600;
 }
 
-.footer-clean {
+.saber-handebol {
   background-color: white;
+  padding: 60px 0;
+}
+ 
+.saber-container {
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+ 
+.saber-texto {
+  width: 55%;
+}
+ 
+.saber-texto h1 {
+  font-size: 70px;
+  color: #d4b62c;
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+ 
+.saber-texto p {
+  color: black;
+  font-size: 20px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+ 
+.saber-botoes {
+  display: flex;
+  gap: 14px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+ 
+.saber-btn-principal {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  width: auto;
+  white-space: nowrap;
+  font-size: 15px;
+}
+ 
+.saber-btn-secundario {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  width: auto;
+  white-space: nowrap;
+  font-size: 15px;
+  background-color: transparent;
+  border: 2px solid #d4b62c;
+  color: #d4b62c;
+  border-radius: 5px;
+  font-weight: 600;
+  font-family: "Barlow", sans-serif;
+}
+ 
+.saber-btn-secundario:hover {
+  background-color: #d4b62c;
+  color: white;
+}
+ 
+/* Fatos */
+.saber-fatos {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+ 
+.fato-item {
+  display: flex;
+  flex-direction: column;
+  border-left: 4px solid #d4b62c;
+  padding-left: 16px;
+}
+ 
+.fato-numero {
+  font-size: 42px;
+  font-weight: 800;
+  color: #d4b62c;
+  line-height: 1;
+}
+ 
+.fato-numero small {
+  font-size: 20px;
+  font-weight: 600;
+}
+ 
+.fato-label {
+  font-size: 14px;
+  color: #555;
+  margin-top: 4px;
+}
+
+.footer-clean {
+  background-color: linear-gradient(90deg, #0a0f1f, #0d1b2a);
   padding: 20px 0;
   border-top: 1px solid #ddd;
 }
@@ -374,7 +476,7 @@ body {
 
 .footer-right p {
   margin: 0;
-  color: black;
+  color: white;
   font-weight: 500;
 }
 
