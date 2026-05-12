@@ -146,14 +146,12 @@
 
         if (resposta.ok) {
           resposta.json().then(function (json) {
-            console.log("Usuário cadastrado: ", json);
-
-            sessionStorage.ID_USUARIO = json.id;
-            sessionStorage.NOME_USUARIO = json.nome;
-            sessionStorage.EMAIL_USUARIO = json.email;
+            sessionStorage.setItem("ID_USUARIO", json.id);
+            sessionStorage.setItem("NOME_USUARIO", json.nome);
+            sessionStorage.setItem("EMAIL_USUARIO", json.email); 
 
             cardErro.style.display = "block";
-            mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para o Quiz...";
+            mensagem_erro.innerHTML = "Cadastro realizado! Redirecionando para o Quiz...";
 
             setTimeout(() => {
               window.location = "quiz.html";

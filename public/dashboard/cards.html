@@ -2,50 +2,36 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Tempo Real</title>
-
+    <title>Handebol | Dashboard</title>
 
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
+    <link rel="icon" href="../assets/icon/861512.png" />
 
     <script src="../js/sessao.js"></script>
-    <script src="../js/alerta.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()">
+<body onload="validarSessao(), iniciarDashboard()">
 
     <div class="janela">
 
+        <!-- Barra lateral -->
         <div class="header-left dash-header">
 
-            <h1>AquaTech</h1>
+            <h1>🤾 Handebol</h1>
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
             <div class="btn-nav">
-                <h3>Aquários</h3>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
+                <h3>Dashboard</h3>
             </div>
 
             <div class="btn-logout" onclick="limparSessao()">
@@ -54,67 +40,266 @@
 
         </div>
 
+        <!-- Conteúdo principal -->
         <div class="dash">
-            <div id="alerta">
-            </div>
-            <div class="area-parametros-alerta">
-                <p class="titulo-legenda">
-                    Legenda - Parâmetros para Alertas
-                </p>
-                <div class="parametros-alerta">
-                    <div class="item-regua perigo-frio">
-                        <p>Perigo</p>
-                        <p>&lt;=5°C</p>
+
+            <!-- ===== PARTE 1: SEUS RESULTADOS ===== -->
+            <div class="dash-section">
+                <p class="dash-titulo">Seus Resultados</p>
+
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <span class="kpi-label">Pontuação</span>
+                        <span class="kpi-valor" id="kpiPontuacao">--</span>
+                        <span class="kpi-sub">de 5 possíveis</span>
                     </div>
-                    <div class="item-regua alerta-frio">
-                        <p>Alerta</p>
-                        <p>&lt;=10°C</p>
+                    <div class="kpi-card kpi-verde">
+                        <span class="kpi-label">Acertos</span>
+                        <span class="kpi-valor" id="kpiAcertos">--</span>
+                        <span class="kpi-sub">questões certas</span>
                     </div>
-                    <div class="item-regua ideal">
-                        <p>Ideal</p>
-                        <p>20°C</p>
+                    <div class="kpi-card kpi-vermelho">
+                        <span class="kpi-label">Erros</span>
+                        <span class="kpi-valor" id="kpiErros">--</span>
+                        <span class="kpi-sub">questões erradas</span>
                     </div>
-                    <div class="item-regua alerta-quente">
-                        <p>Alerta</p>
-                        <p>&gt;=22°C</p>
+                    <div class="kpi-card kpi-dourado">
+                        <span class="kpi-label">Aproveitamento</span>
+                        <span class="kpi-valor" id="kpiAproveitamento">--</span>
+                        <span class="kpi-sub">% de acertos</span>
                     </div>
-                    <div class="item-regua perigo-quente">
-                        <p>Perigo</p>
-                        <p>&gt;=23°C</p>
+                </div>
+
+                <div class="dash-graficos-row">
+                    <div class="grafico-card">
+                        <h3>Acertos x Erros</h3>
+                        <canvas id="graficoPizza"></canvas>
+                    </div>
+                    <div class="grafico-card grafico-info">
+                        <h3>Detalhes</h3>
+                        <div class="info-item">
+                            <span class="info-label">Nome</span>
+                            <span class="info-valor" id="infoNome">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">E-mail</span>
+                            <span class="info-valor" id="infoEmail">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Data do Quiz</span>
+                            <span class="info-valor" id="infoData">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Resultado</span>
+                            <span class="info-valor" id="infoResultado">--</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="cards" id="cardAquarios">
+            <!-- ===== PARTE 2: RANKING GERAL ===== -->
+            <div class="dash-section">
+                <p class="dash-titulo">Ranking Geral</p>
+
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <span class="kpi-label">Total de Participantes</span>
+                        <span class="kpi-valor" id="kpiTotal">--</span>
+                        <span class="kpi-sub">usuários</span>
+                    </div>
+                    <div class="kpi-card kpi-dourado">
+                        <span class="kpi-label">Média Geral</span>
+                        <span class="kpi-valor" id="kpiMedia">--</span>
+                        <span class="kpi-sub">pontos em média</span>
+                    </div>
+                    <div class="kpi-card kpi-verde">
+                        <span class="kpi-label">Maior Pontuação</span>
+                        <span class="kpi-valor" id="kpiMaior">--</span>
+                        <span class="kpi-sub">pontos</span>
+                    </div>
+                    <div class="kpi-card kpi-vermelho">
+                        <span class="kpi-label">Menor Pontuação</span>
+                        <span class="kpi-valor" id="kpiMenor">--</span>
+                        <span class="kpi-sub">pontos</span>
+                    </div>
+                </div>
+
+                <div class="dash-graficos-row">
+                    <div class="grafico-card grafico-largo">
+                        <h3>Pontuação por Usuário</h3>
+                        <canvas id="graficoBarras"></canvas>
+                    </div>
+                </div>
+
+                <div class="tabela-card">
+                    <h3>Todos os Resultados</h3>
+                    <table class="dash-tabela">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nome</th>
+                                <th>Pontuação</th>
+                                <th>Acertos</th>
+                                <th>Erros</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaResultados">
+                            <tr><td colspan="6">Carregando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
         </div>
-
     </div>
 
 </body>
 
+</html>
+
 <script>
 
-    function exibirAquarios() {
-        JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-            document.getElementById("cardAquarios").innerHTML += `
-                    <div class="card-aquario">
-                        <div class="title-aquario">
-                            <h1>${item.descricao}</h1>
-                        </div>
-                        <div class="desc-aquario">
-                        <div class="temperatura">
-                            <p id="temp_aquario_${item.id}">-°C</p>
-                        </div>
-                        <div class="cor-alerta" id="card_${item.id}"></div>
-                    </div>
-                    </div>
-                    `
+    function iniciarDashboard() {
+        var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+        var emailUsuario = sessionStorage.EMAIL_USUARIO;
+        
+        document.getElementById("infoNome").innerHTML = nomeUsuario;
+        document.getElementById("infoEmail").innerHTML = emailUsuario;
+
+        fetch("/quiz/listar")
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (dados) {
+                // Dados do usuário logado
+                var meuResultado = dados.find(function (item) {
+                    return item.nome === nomeUsuario;
+                });
+
+                if (meuResultado) {
+                    preencherMeusResultados(meuResultado);
+                }
+
+                // Dados gerais
+                preencherRankingGeral(dados);
+            })
+            .catch(function (erro) {
+                console.log("Erro ao carregar dados: ", erro);
+            });
+    }
+
+    function preencherMeusResultados(dados) {
+        var aproveitamento = Math.round((dados.acertos / 5) * 100);
+
+        document.getElementById("kpiPontuacao").innerHTML = dados.pontuacao;
+        document.getElementById("kpiAcertos").innerHTML = dados.acertos;
+        document.getElementById("kpiErros").innerHTML = dados.erros;
+        document.getElementById("kpiAproveitamento").innerHTML = aproveitamento + "%";
+
+        var resultado = "";
+        if (aproveitamento <= 30) {
+            resultado = "😔 Precisa estudar mais!";
+        } else if (aproveitamento < 90) {
+            resultado = "😐 Pode melhorar!";
+        } else {
+            resultado = "🏆 Excelente!";
+        }
+        document.getElementById("infoResultado").innerHTML = resultado;
+
+        var data = new Date(dados.data_criacao);
+        document.getElementById("infoData").innerHTML = data.toLocaleDateString("pt-BR");
+
+        // Gráfico pizza
+        var ctx = document.getElementById("graficoPizza").getContext("2d");
+        new Chart(ctx, {
+            type: "doughnut",
+            data: {
+                labels: ["Acertos", "Erros"],
+                datasets: [{
+                    data: [dados.acertos, dados.erros],
+                    backgroundColor: ["#095c36", "#990c19"],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: "bottom", labels: { color: "#ccc" } }
+                }
+            }
+        });
+    }
+
+    function preencherRankingGeral(dados) {
+        var total = dados.length;
+        var soma = dados.reduce(function (acc, item) { return acc + item.pontuacao; }, 0);
+        var media = (soma / total).toFixed(1);
+        var maior = Math.max(...dados.map(function (i) { return i.pontuacao; }));
+        var menor = Math.min(...dados.map(function (i) { return i.pontuacao; }));
+
+        document.getElementById("kpiTotal").innerHTML = total;
+        document.getElementById("kpiMedia").innerHTML = media;
+        document.getElementById("kpiMaior").innerHTML = maior;
+        document.getElementById("kpiMenor").innerHTML = menor;
+
+        // Ordenar por pontuação
+        dados.sort(function (a, b) { return b.pontuacao - a.pontuacao; });
+
+        // Gráfico de barras
+        var ctx2 = document.getElementById("graficoBarras").getContext("2d");
+        new Chart(ctx2, {
+            type: "bar",
+            data: {
+                labels: dados.map(function (i) { return i.nome; }),
+                datasets: [{
+                    label: "Pontuação",
+                    data: dados.map(function (i) { return i.pontuacao; }),
+                    backgroundColor: "#d4b62c",
+                    borderRadius: 6,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 5,
+                        ticks: { stepSize: 1, color: "#aaa" },
+                        grid: { color: "#1a2a3a" }
+                    },
+                    x: {
+                        ticks: { color: "#aaa" },
+                        grid: { color: "#1a2a3a" }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // Tabela
+        var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+        var tbody = document.getElementById("tabelaResultados");
+        tbody.innerHTML = "";
+        dados.forEach(function (item, index) {
+            var data = new Date(item.data_criacao);
+            var dataFormatada = data.toLocaleDateString("pt-BR");
+            var destaque = item.nome === nomeUsuario ? "linha-destaque" : "";
+            tbody.innerHTML += `
+                <tr class="${destaque}">
+                    <td>${index + 1}º</td>
+                    <td>${item.nome}</td>
+                    <td>${item.pontuacao}</td>
+                    <td>${item.acertos}</td>
+                    <td>${item.erros}</td>
+                    <td>${dataFormatada}</td>
+                </tr>
+            `;
         });
     }
 
 </script>
-
-</html>
