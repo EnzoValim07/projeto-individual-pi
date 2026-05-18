@@ -23,85 +23,86 @@
 
         <!-- Barra lateral -->
         <div class="header-left dash-header">
-
             <h1>🤾 Handebol</h1>
-
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
-
-            <div class="btn-nav">
-                <h3>Dashboard</h3>
+            <div class="btn-nav"><h3>Dashboard</h3></div>
+            <div class="btn-nav-white">
+                <a href="./mural.html"><h3>Mural de Avisos</h3></a>
             </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
+            <div class="btn-logout" onclick="limparSessao()"><h3>Sair</h3></div>
         </div>
 
         <!-- Conteúdo principal -->
         <div class="dash">
 
-            <!-- ===== PARTE 1: SEUS RESULTADOS ===== -->
+            <!-- ===== SEÇÃO: PERFIL ===== -->
             <div class="dash-section">
-                <p class="dash-titulo">Seus Resultados</p>
+                <p class="dash-titulo">Meu Perfil</p>
 
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <span class="kpi-label">Pontuação</span>
-                        <span class="kpi-valor" id="kpiPontuacao">--</span>
-                        <span class="kpi-sub">de 5 possíveis</span>
-                    </div>
-                    <div class="kpi-card kpi-verde">
-                        <span class="kpi-label">Acertos</span>
-                        <span class="kpi-valor" id="kpiAcertos">--</span>
-                        <span class="kpi-sub">questões certas</span>
-                    </div>
-                    <div class="kpi-card kpi-vermelho">
-                        <span class="kpi-label">Erros</span>
-                        <span class="kpi-valor" id="kpiErros">--</span>
-                        <span class="kpi-sub">questões erradas</span>
-                    </div>
-                    <div class="kpi-card kpi-dourado">
-                        <span class="kpi-label">Aproveitamento</span>
-                        <span class="kpi-valor" id="kpiAproveitamento">--</span>
-                        <span class="kpi-sub">% de acertos</span>
-                    </div>
-                </div>
+                <div class="perfil-grid">
 
-                <div class="dash-graficos-row">
-                    <div class="grafico-card">
-                        <h3>Acertos x Erros</h3>
-                        <canvas id="graficoPizza"></canvas>
-                    </div>
-                    <div class="grafico-card grafico-info">
-                        <h3>Detalhes</h3>
-                        <div class="info-item">
-                            <span class="info-label">Nome</span>
-                            <span class="info-valor" id="infoNome">--</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">E-mail</span>
-                            <span class="info-valor" id="infoEmail">--</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Data do Quiz</span>
-                            <span class="info-valor" id="infoData">--</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Resultado</span>
-                            <span class="info-valor" id="infoResultado">--</span>
+                    <div class="perfil-card">
+                        <div class="perfil-avatar" id="perfilAvatar">🤾</div>
+                        <div class="perfil-badge" id="perfilBadge">--</div>
+                        <div class="perfil-info">
+                            <div class="info-item">
+                                <span class="info-label">Nome</span>
+                                <span class="info-valor" id="infoNome">--</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">E-mail</span>
+                                <span class="info-valor" id="infoEmail">--</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Data do Quiz</span>
+                                <span class="info-valor" id="infoData">--</span>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="perfil-kpis">
+                        <p class="dash-subtitulo">Resultado do Quiz</p>
+                        <div class="kpi-grid">
+                            <div class="kpi-card kpi-dourado">
+                                <span class="kpi-label">Pontuação</span>
+                                <span class="kpi-valor" id="kpiPontuacao">--</span>
+                                <span class="kpi-sub">de 5 possíveis</span>
+                            </div>
+                            <div class="kpi-card kpi-verde">
+                                <span class="kpi-label">Acertos</span>
+                                <span class="kpi-valor" id="kpiAcertos">--</span>
+                                <span class="kpi-sub">questões certas</span>
+                            </div>
+                            <div class="kpi-card kpi-vermelho">
+                                <span class="kpi-label">Erros</span>
+                                <span class="kpi-valor" id="kpiErros">--</span>
+                                <span class="kpi-sub">questões erradas</span>
+                            </div>
+                            <div class="kpi-card">
+                                <span class="kpi-label">Aproveitamento</span>
+                                <span class="kpi-valor" id="kpiAproveitamento">--</span>
+                                <span class="kpi-sub">% de acertos</span>
+                            </div>
+                        </div>
+
+                        <div class="grafico-card" style="margin-top: 20px;">
+                            <h3>Acertos x Erros</h3>
+                            <div style="max-width: 260px; margin: auto;">
+                                <canvas id="graficoPizza"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- ===== PARTE 2: RANKING GERAL ===== -->
+            <!-- ===== SEÇÃO: RANKING ===== -->
             <div class="dash-section">
                 <p class="dash-titulo">Ranking Geral</p>
 
-                <div class="kpi-grid">
+                <div class="kpi-grid" style="margin-bottom: 24px;">
                     <div class="kpi-card">
                         <span class="kpi-label">Total de Participantes</span>
                         <span class="kpi-valor" id="kpiTotal">--</span>
@@ -124,11 +125,9 @@
                     </div>
                 </div>
 
-                <div class="dash-graficos-row">
-                    <div class="grafico-card grafico-largo">
-                        <h3>Pontuação por Usuário</h3>
-                        <canvas id="graficoBarras"></canvas>
-                    </div>
+                <div class="grafico-card" style="margin-bottom: 24px;">
+                    <h3>Pontuação por Usuário</h3>
+                    <canvas id="graficoBarras"></canvas>
                 </div>
 
                 <div class="tabela-card">
@@ -149,48 +148,36 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
 
         </div>
     </div>
 
 </body>
-
 </html>
 
 <script>
 
     function iniciarDashboard() {
-        var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+        var nomeUsuario = sessionStorage.NOME_USUARIO;
         var emailUsuario = sessionStorage.EMAIL_USUARIO;
-        
+
         document.getElementById("infoNome").innerHTML = nomeUsuario;
         document.getElementById("infoEmail").innerHTML = emailUsuario;
 
         fetch("/quiz/listar")
-            .then(function (resposta) {
-                return resposta.json();
-            })
+            .then(res => res.json())
             .then(function (dados) {
-                // Dados do usuário logado
-                var meuResultado = dados.find(function (item) {
-                    return item.nome === nomeUsuario;
-                });
-
+                var meuResultado = dados.find(item => item.nome === nomeUsuario);
                 if (meuResultado) {
-                    preencherMeusResultados(meuResultado);
+                    preencherPerfil(meuResultado);
                 }
-
-                // Dados gerais
-                preencherRankingGeral(dados);
+                preencherRanking(dados);
             })
-            .catch(function (erro) {
-                console.log("Erro ao carregar dados: ", erro);
-            });
+            .catch(erro => console.log("Erro ao carregar quiz: ", erro));
     }
 
-    function preencherMeusResultados(dados) {
+    function preencherPerfil(dados) {
         var aproveitamento = Math.round((dados.acertos / 5) * 100);
 
         document.getElementById("kpiPontuacao").innerHTML = dados.pontuacao;
@@ -198,20 +185,26 @@
         document.getElementById("kpiErros").innerHTML = dados.erros;
         document.getElementById("kpiAproveitamento").innerHTML = aproveitamento + "%";
 
-        var resultado = "";
-        if (aproveitamento <= 30) {
-            resultado = "😔 Precisa estudar mais!";
-        } else if (aproveitamento < 90) {
-            resultado = "😐 Pode melhorar!";
-        } else {
-            resultado = "🏆 Excelente!";
-        }
-        document.getElementById("infoResultado").innerHTML = resultado;
-
         var data = new Date(dados.data_criacao);
         document.getElementById("infoData").innerHTML = data.toLocaleDateString("pt-BR");
 
-        // Gráfico pizza
+        var badge = "";
+        var avatar = "🤾";
+        if (aproveitamento <= 30) {
+            badge = "🌱 Iniciante";
+        } else if (aproveitamento <= 50) {
+            badge = "📚 Aprendiz";
+        } else if (aproveitamento <= 80) {
+            badge = "⭐ Torcedor";
+        } else if (aproveitamento < 100) {
+            badge = "🏅 Atleta";
+        } else {
+            badge = "🏆 Craque!";
+            avatar = "🏆";
+        }
+        document.getElementById("perfilBadge").innerHTML = badge;
+        document.getElementById("perfilAvatar").innerHTML = avatar;
+
         var ctx = document.getElementById("graficoPizza").getContext("2d");
         new Chart(ctx, {
             type: "doughnut",
@@ -232,73 +225,59 @@
         });
     }
 
-    function preencherRankingGeral(dados) {
+    function preencherRanking(dados) {
         var total = dados.length;
-        var soma = dados.reduce(function (acc, item) { return acc + item.pontuacao; }, 0);
+        var soma = dados.reduce((acc, item) => acc + item.pontuacao, 0);
         var media = (soma / total).toFixed(1);
-        var maior = Math.max(...dados.map(function (i) { return i.pontuacao; }));
-        var menor = Math.min(...dados.map(function (i) { return i.pontuacao; }));
+        var maior = Math.max(...dados.map(i => i.pontuacao));
+        var menor = Math.min(...dados.map(i => i.pontuacao));
 
         document.getElementById("kpiTotal").innerHTML = total;
         document.getElementById("kpiMedia").innerHTML = media;
         document.getElementById("kpiMaior").innerHTML = maior;
         document.getElementById("kpiMenor").innerHTML = menor;
 
-        // Ordenar por pontuação
-        dados.sort(function (a, b) { return b.pontuacao - a.pontuacao; });
+        dados.sort((a, b) => b.pontuacao - a.pontuacao);
 
-        // Gráfico de barras
         var ctx2 = document.getElementById("graficoBarras").getContext("2d");
         new Chart(ctx2, {
             type: "bar",
             data: {
-                labels: dados.map(function (i) { return i.nome; }),
+                labels: dados.map(i => i.nome),
                 datasets: [{
                     label: "Pontuação",
-                    data: dados.map(function (i) { return i.pontuacao; }),
+                    data: dados.map(i => i.pontuacao),
                     backgroundColor: "#d4b62c",
                     borderRadius: 6,
-                    borderWidth: 0
+                    borderWidth: 0,
+                    barThickness: 80
                 }]
             },
             options: {
                 responsive: true,
                 scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 5,
-                        ticks: { stepSize: 1, color: "#aaa" },
-                        grid: { color: "#1a2a3a" }
-                    },
-                    x: {
-                        ticks: { color: "#aaa" },
-                        grid: { color: "#1a2a3a" }
-                    }
+                    y: { beginAtZero: true, max: 5, ticks: { stepSize: 1, color: "#aaa" }, grid: { color: "#1a2a3a" } },
+                    x: { ticks: { color: "#aaa" }, grid: { color: "#1a2a3a" } }
                 },
-                plugins: {
-                    legend: { display: false }
-                }
+                plugins: { legend: { display: false } }
             }
         });
 
-        // Tabela
-        var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+        var nomeUsuario = sessionStorage.NOME_USUARIO;
         var tbody = document.getElementById("tabelaResultados");
         tbody.innerHTML = "";
         dados.forEach(function (item, index) {
             var data = new Date(item.data_criacao);
-            var dataFormatada = data.toLocaleDateString("pt-BR");
             var destaque = item.nome === nomeUsuario ? "linha-destaque" : "";
-            tbody.innerHTML += `
-                <tr class="${destaque}">
-                    <td>${index + 1}º</td>
-                    <td>${item.nome}</td>
-                    <td>${item.pontuacao}</td>
-                    <td>${item.acertos}</td>
-                    <td>${item.erros}</td>
-                    <td>${dataFormatada}</td>
-                </tr>
-            `;
+            tbody.innerHTML +=
+                "<tr class='" + destaque + "'>" +
+                    "<td>" + (index + 1) + "º</td>" +
+                    "<td>" + item.nome + "</td>" +
+                    "<td>" + item.pontuacao + "</td>" +
+                    "<td>" + item.acertos + "</td>" +
+                    "<td>" + item.erros + "</td>" +
+                    "<td>" + data.toLocaleDateString("pt-BR") + "</td>" +
+                "</tr>";
         });
     }
 

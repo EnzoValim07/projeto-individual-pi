@@ -2,249 +2,206 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Avisos</title>
+    <title>Handebol | Mural de Avisos</title>
 
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
+    <link rel="icon" href="../assets/icon/861512.png" />
     <script src="../js/sessao.js"></script>
-    <script src="./../js/alerta.js"></script>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), atualizarFeed()" style="background-color: #161618;">
+<body onload="validarSessao(), verificarPermissao(), atualizarFeed()">
 
     <div class="janela">
 
-
+        <!-- Barra lateral -->
         <div class="header-left">
-
-            <h1>AquaTech</h1>
-
+            <h1>🤾 Handebol</h1>
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
-
             <div class="btn-nav-white">
-                <a href="cards.html">
-                    <h3>Aquários</h3>
-                </a>
+                <a href="./cards.html"><h3>Dashboard</h3></a>
             </div>
-
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
-                </a>
-            </div>
-
             <div class="btn-nav">
                 <h3>Mural de Avisos</h3>
             </div>
-
             <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
             </div>
-
         </div>
 
-        <div class="dash-right">
+        <!-- Conteúdo principal -->
+        <div class="dash">
 
+            <p class="dash-titulo">Mural de Avisos</p>
 
-            <div class="avisos">
-                <div id="alerta">
-                </div>
-                <div class="container">
-                    <h1>Publicar um aviso</h1>
-                    <div class="div-form">
-                        <form id="form_postagem" method="post" onsubmit="return publicar()">
-                            <label>
-                                Título:
-                                <br>
-                                <input name="titulo" id="titulo" maxlength="100" type="text">
-                            </label>
-                            <br>
-                            <br>
-                            <label>
-                                Descrição (máximo de 250 caracteres):
-                                <br>
-                                <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
-                            </label>
-                            <br>
-                            <br>
-                            <button>Enviar</button>
-                        </form>
+            <!-- Formulário de publicação (liberado só para >50%) -->
+            <div id="formPublicar" style="display:none;">
+                <p class="dash-subtitulo">Publicar um Aviso</p>
+                <div class="mural-form">
+                    <div class="campo-mural">
+                        <span>Título:</span>
+                        <input id="titulo" maxlength="100" type="text" placeholder="Título do aviso" />
                     </div>
-                    <h1>Mural de Avisos</h1>
-                    <div class="div-results">
-                        <div id="feed_container" class="feed-container">
-                        </div>
+                    <div class="campo-mural">
+                        <span>Descrição (máximo de 250 caracteres):</span>
+                        <textarea id="textarea_descricao" maxlength="250" rows="5" placeholder="Escreva seu aviso aqui..."></textarea>
                     </div>
+                    <button class="botao botao-mural" onclick="publicar()">Publicar</button>
                 </div>
             </div>
+
+            <!-- Aviso de bloqueio -->
+            <div id="muralBloqueado" style="display:none;">
+                <div class="mural-bloqueado">
+                    <span>🔒</span>
+                    <p>Você precisa de mais de <strong>50% de aproveitamento</strong> no quiz para publicar avisos.</p>
+                </div>
+            </div>
+
+            <!-- Feed de avisos -->
+            <div>
+                <p class="dash-subtitulo">Avisos Publicados</p>
+                <div id="feed_container" class="lista-avisos">
+                    <p style="color:#aaa;">Carregando avisos...</p>
+                </div>
+            </div>
+
         </div>
     </div>
 
-
-
-
 </body>
-
 </html>
 
 <script>
-    
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-    function limparFormulario() {
-        document.getElementById("form_postagem").reset();
+    function verificarPermissao() {
+        fetch("/quiz/listar")
+            .then(res => res.json())
+            .then(function (dados) {
+                var nomeUsuario = sessionStorage.NOME_USUARIO;
+                var meuResultado = dados.find(item => item.nome === nomeUsuario);
+
+                if (meuResultado) {
+                    var aproveitamento = Math.round((meuResultado.acertos / 5) * 100);
+                    if (aproveitamento > 50) {
+                        document.getElementById("formPublicar").style.display = "block";
+                    } else {
+                        document.getElementById("muralBloqueado").style.display = "block";
+                    }
+                }
+            })
+            .catch(erro => console.log("Erro ao verificar permissão: ", erro));
     }
 
     function publicar() {
         var idUsuario = sessionStorage.ID_USUARIO;
+        var titulo = document.getElementById("titulo").value;
+        var descricao = document.getElementById("textarea_descricao").value;
 
-        var corpo = {
-            titulo: form_postagem.titulo.value,
-            descricao: form_postagem.descricao.value
+        if (titulo == "" || descricao == "") {
+            alert("Preencha o título e a descrição!");
+            return false;
         }
 
-        fetch(`/avisos/publicar/${idUsuario}`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(corpo)
-        }).then(function (resposta) {
-
-            console.log("resposta: ", resposta);
-
+        fetch("/avisos/publicar/" + idUsuario, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ titulo: titulo, descricao: descricao })
+        })
+        .then(function (resposta) {
             if (resposta.ok) {
-                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
-                window.location = "/dashboard/mural.html";
-                limparFormulario();
-                finalizarAguardar();
-            } else if (resposta.status == 404) {
-                window.alert("Deu 404!");
+                alert("Aviso publicado com sucesso!");
+                document.getElementById("titulo").value = "";
+                document.getElementById("textarea_descricao").value = "";
+                atualizarFeed();
             } else {
-                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                throw "Houve um erro ao publicar o aviso! Código: " + resposta.status;
             }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
-        });
+        })
+        .catch(erro => console.log("#ERRO: ", erro));
 
         return false;
-
     }
 
     function editar(idAviso) {
         sessionStorage.ID_POSTAGEM_EDITANDO = idAviso;
-        console.log("cliquei em editar - " + idAviso);
-        window.alert("Você será redirecionado à página de edição do aviso de id número: " + idAviso);
-        window.location = "/dashboard/edicao-aviso.html"
-
+        alert("Você será redirecionado à página de edição do aviso de ID: " + idAviso);
+        window.location = "/dashboard/edicao-aviso.html";
     }
 
     function deletar(idAviso) {
-        console.log("Criar função de apagar post escolhido - ID" + idAviso);
-        fetch(`/avisos/deletar/${idAviso}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(function (resposta) {
+        if (!confirm("Tem certeza que deseja excluir este aviso?")) return;
 
+        fetch("/avisos/deletar/" + idAviso, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" }
+        })
+        .then(function (resposta) {
             if (resposta.ok) {
-                window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                window.location = "/dashboard/mural.html"
-            } else if (resposta.status == 404) {
-                window.alert("Deu 404!");
+                alert("Aviso deletado com sucesso!");
+                atualizarFeed();
             } else {
-                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                throw "Houve um erro ao deletar o aviso! Código: " + resposta.status;
             }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
+        })
+        .catch(erro => console.log("#ERRO: ", erro));
     }
 
     function atualizarFeed() {
-        fetch("/avisos/listar").then(function (resposta) {
-            if (resposta.ok) {
+        fetch("/avisos/listar")
+            .then(function (resposta) {
                 if (resposta.status == 204) {
-                    var feed = document.getElementById("feed_container");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
-                    feed.appendChild(mensagem);
-                    throw "Nenhum resultado encontrado!!";
+                    document.getElementById("feed_container").innerHTML = "<p style='color:#aaa;'>Nenhum aviso publicado ainda.</p>";
+                    return;
                 }
 
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                if (resposta.ok) {
+                    resposta.json().then(function (avisos) {
+                        var feed = document.getElementById("feed_container");
+                        feed.innerHTML = "";
 
-                    var feed = document.getElementById("feed_container");
-                    feed.innerHTML = "";
-                    for (let i = 0; i < resposta.length; i++) {
-                        var publicacao = resposta[i];
+                        var idUsuarioLogado = Number(sessionStorage.ID_USUARIO);
 
-                        // criando e manipulando elementos do HTML via JavaScript
-                        var divPublicacao = document.createElement("div");
-                        var spanID = document.createElement("span");
-                        var spanTitulo = document.createElement("span");
-                        var spanNome = document.createElement("span");
-                        var divDescricao = document.createElement("div");
-                        var divButtons = document.createElement("div");
-                        var btnEditar = document.createElement("button");
-                        var btnDeletar = document.createElement("button");
+                        for (let i = 0; i < avisos.length; i++) {
+                            var aviso = avisos[i];
+                            var idAviso = Number(aviso.idAviso);
+                            var ehMeu = Number(aviso.idUsuario) === idUsuarioLogado;
 
+                            var divAviso = document.createElement("div");
+                            divAviso.className = "aviso-card";
 
-                        spanID.innerHTML = "ID: <b>" + publicacao.idAviso + "</b>";
-                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
-                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
-                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
-                        btnEditar.innerHTML = "Editar";
-                        btnDeletar.innerHTML = "Deletar";
+                            
+                            var botoesHtml = "";
+                            if (ehMeu) {
+                                botoesHtml = '<div class="aviso-botoes">' +
+                                    '<button class="botao-editar" onclick="editar(' + idAviso + ')">✏️ Editar</button>' +
+                                    '<button class="botao-deletar" onclick="deletar(' + idAviso + ')">🗑 Excluir</button>' +
+                                    '</div>';
+                            }
 
-                        divPublicacao.className = "publicacao";
-                        spanTitulo.id = "inputNumero" + publicacao.idAviso;
-                        spanNome.className = "publicacao-nome";
-                        spanTitulo.className = "publicacao-titulo";
-                        divDescricao.className = "publicacao-descricao";
+                            divAviso.innerHTML =
+                                '<div class="aviso-header">' +
+                                    '<span class="aviso-titulo">' + aviso.titulo + '</span>' +
+                                    '<span class="aviso-autor">por ' + aviso.nome + '</span>' +
+                                '</div>' +
+                                '<p class="aviso-descricao">' + aviso.descricao + '</p>' +
+                                botoesHtml;
 
-                        divButtons.className = "div-buttons"
-
-                        btnEditar.className = "publicacao-btn-editar"
-                        btnEditar.id = "btnEditar" + publicacao.idAviso;
-                        btnEditar.setAttribute("onclick", `editar(${publicacao.idAviso})`);
-
-                        btnDeletar.className = "publicacao-btn-editar"
-                        btnDeletar.id = "btnDeletar" + publicacao.idAviso;
-                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
-
-                        divPublicacao.appendChild(spanID);
-                        divPublicacao.appendChild(spanNome);
-                        divPublicacao.appendChild(spanTitulo);
-                        divPublicacao.appendChild(divDescricao);
-                        divPublicacao.appendChild(divButtons);
-                        divButtons.appendChild(btnEditar);
-                        divButtons.appendChild(btnDeletar);
-                        feed.appendChild(divPublicacao);
-                    }
-
-                    finalizarAguardar();
-                });
-            } else {
-                throw ('Houve um erro na API!');
-            }
-        }).catch(function (resposta) {
-            console.error(resposta);
-            finalizarAguardar();
-        });
+                            feed.appendChild(divAviso);
+                        }
+                    });
+                } else {
+                    throw "Houve um erro na API!";
+                }
+            })
+            .catch(erro => console.error(erro));
     }
 
 </script>

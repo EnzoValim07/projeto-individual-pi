@@ -107,6 +107,19 @@
       });
   }
 
+  function validarEmail(email) {
+    if (!email.includes("@") || !email.includes(".")) {
+        return false;
+    }
+    return true;
+}
+
+  function mostrarErro(mensagem) {
+    cardErro.style.display = "block";
+    mensagem_erro.innerHTML = mensagem;
+    setInterval(sumirMensagem, 5000);
+  }
+
   function cadastrar() {
     var nomeVar = nome_input.value;
     var emailVar = email_input.value;
@@ -121,12 +134,21 @@
       confirmacaoSenhaVar == "" ||
       conheceVar == ""
     ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+      mostrarErro("Preencha todos os campos antes de continuar!");
       finalizarAguardar();
       return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
+    }
+
+    if (!validarEmail(emailVar)) {
+      mostrarErro("E-mail inválido! Use o formato: email@provedor.com");
+      finalizarAguardar();
+      return false;
+    }
+
+    if (senhaVar !== confirmacaoSenhaVar) {
+      mostrarErro("As senhas não coincidem! Verifique e tente novamente.");
+      finalizarAguardar();
+      return false;
     }
 
     fetch("/usuarios/cadastrar", {
@@ -148,7 +170,7 @@
           resposta.json().then(function (json) {
             sessionStorage.setItem("ID_USUARIO", json.id);
             sessionStorage.setItem("NOME_USUARIO", json.nome);
-            sessionStorage.setItem("EMAIL_USUARIO", json.email); 
+            sessionStorage.setItem("EMAIL_USUARIO", json.email);
 
             cardErro.style.display = "block";
             mensagem_erro.innerHTML = "Cadastro realizado! Redirecionando para o Quiz...";
@@ -161,11 +183,12 @@
           limparFormulario();
           finalizarAguardar();
         } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
+          mostrarErro("Houve um erro ao tentar realizar o cadastro!");
+          finalizarAguardar();
         }
       })
       .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
+        console.log("#ERRO: " + resposta);
         finalizarAguardar();
       });
 

@@ -1,11 +1,3 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
-
-/*
-comandos para mysql server
-*/
-
 CREATE DATABASE handebol;
 
 USE handebol;
@@ -18,7 +10,7 @@ CREATE TABLE respostaInicial (
 CREATE TABLE usuario (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(50),
-	email VARCHAR(70),
+	email VARCHAR(70) UNIQUE,
 	senha VARCHAR(50),
     conhece INT,
     constraint fk_conhece FOREIGN KEY (conhece) REFERENCES respostaInicial(id_resposta)
@@ -27,6 +19,7 @@ CREATE TABLE usuario (
 INSERT INTO respostaInicial (descricao) VALUES ('Sim');
 INSERT INTO respostaInicial (descricao) VALUES ('Não');
 
+-- Tabela com as perguntas do quiz
 CREATE TABLE resultado_quiz (
     id INT PRIMARY KEY AUTO_INCREMENT,
     acertos INT,
@@ -37,6 +30,13 @@ CREATE TABLE resultado_quiz (
     CONSTRAINT fk_usuario_resultado FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
 );
 
+CREATE TABLE aviso (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(100),
+    descricao VARCHAR(250),
+    fk_usuario INT,
+    CONSTRAINT fk_usuario_aviso FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+);
 
 select * from usuario;
 
