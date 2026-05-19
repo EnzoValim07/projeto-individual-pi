@@ -133,31 +133,35 @@ body {
     width: 80%;
     position: relative;
     left: 20%;
-    background-color: #0a0a0a;
+    background-image: url('../assets/imgs/imgDash.png');
+    background-size: cover;
+    background-position: center;
     min-height: 100vh;
     overflow: auto;
     padding: 40px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 40px;
-}
-
-/* ===== SEÇÕES ===== */
-
-.dash-section {
-    display: flex;
-    flex-direction: column;
     gap: 24px;
 }
 
+/* ===== LINHAS DO LAYOUT ===== */
+
+.dash-linha {
+    display: flex;
+    gap: 24px;
+    align-items: stretch;
+}
+
+/* ===== TÍTULOS ===== */
+
 .dash-titulo {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: white;
     text-transform: uppercase;
-    margin: 0;
-    padding-bottom: 12px;
+    margin: 16px 0 16px 0;
+    padding-bottom: 10px;
     border-bottom: 3px solid #d4b62c;
     width: fit-content;
     letter-spacing: 1px;
@@ -172,28 +176,24 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* ===== PERFIL ===== */
-
-.perfil-grid {
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
-}
+/* ===== CARD PERFIL (linha 1 esquerda) ===== */
 
 .perfil-card {
-    background-color: #0d1b2a;
+    background-color: rgba(8, 16, 24, 0.75);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 10px;
-    padding: 30px 24px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
-    min-width: 220px;
-    width: 220px;
+    gap: 14px;
+    width: 240px;
+    min-width: 240px;
+    box-sizing: border-box;
 }
 
 .perfil-avatar {
-    font-size: 60px;
+    font-size: 56px;
     line-height: 1;
 }
 
@@ -201,9 +201,9 @@ body {
     background-color: #162030;
     border: 2px solid #d4b62c;
     color: #d4b62c;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
-    padding: 6px 16px;
+    padding: 5px 14px;
     border-radius: 20px;
     text-align: center;
 }
@@ -211,14 +211,63 @@ body {
 .perfil-info {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
     width: 100%;
 }
 
-.perfil-kpis {
+/* ===== CARD RESULTADO DO QUIZ (linha 1 direita) ===== */
+
+.resultado-card {
+    background-color: rgba(8, 16, 24, 0.75);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 24px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+/* ===== CARD GRÁFICO PIZZA (linha 2 esquerda) ===== */
+
+.grafico-pizza-card {
+    background-color: rgba(8, 16, 24, 0.75);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 24px;
+    width: 340px;
+    min-width: 340px;
+    box-sizing: border-box;
+}
+
+/* ===== CARD RANKING (linha 2 direita) ===== */
+
+.ranking-card {
+    background-color: rgba(8, 16, 24, 0.75);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 24px;
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 20px;
+    box-sizing: border-box;
+}
+
+.tabela-card-total {
+    background-color: rgba(8, 16, 24, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 24px;
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.tabela-card-total h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #d4b62c;
+    margin: 0 0 16px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* ===== KPI CARDS ===== */
@@ -226,14 +275,15 @@ body {
 .kpi-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 14px;
 }
 
 .kpi-card {
-    background-color: #0d1b2a;
+    background-color: rgba(8, 16, 24, 0.45);
+    border: 1px solid rgba(255,255,255,0.08);
     border-left: 4px solid #333;
     border-radius: 10px;
-    padding: 24px 20px;
+    padding: 18px 14px;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -244,49 +294,42 @@ body {
 .kpi-card.kpi-vermelho { border-left-color: #990c19; }
 
 .kpi-label {
-    font-size: 12px;
+    font-size: 11px;
     color: #aaa;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .kpi-valor {
-    font-size: 40px;
+    font-size: 34px;
     font-weight: 800;
     color: #d4b62c;
     line-height: 1;
 }
 
 .kpi-sub {
-    font-size: 12px;
+    font-size: 11px;
     color: #555;
 }
 
-/* ===== GRÁFICOS ===== */
-
-.dash-graficos-row {
-    display: flex;
-    gap: 20px;
-}
+/* ===== GRÁFICO CARD ===== */
 
 .grafico-card {
-    background-color: #0d1b2a;
+    background-color: rgba(8, 16, 24, 0.45);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 10px;
-    padding: 24px;
-    flex: 1;
+    padding: 20px;
+    height: 300px; /* Força uma altura fixa para o bloco do gráfico */
+    max-height: 350px; /* Garante que ele não passe disso de jeito nenhum */
 }
 
 .grafico-card h3 {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     color: #d4b62c;
-    margin: 0 0 20px 0;
+    margin: 0 0 16px 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-}
-
-.grafico-largo {
-    flex: 2;
 }
 
 /* ===== INFO ITEMS ===== */
@@ -306,9 +349,62 @@ body {
 }
 
 .info-valor {
-    font-size: 15px;
+    font-size: 14px;
     color: white;
     font-weight: 500;
+}
+
+/* ===== TABELA ===== */
+
+.tabela-card {
+    background-color: rgba(8, 16, 24, 0.45);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.tabela-card h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #d4b62c;
+    margin: 0 0 16px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dash-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.dash-tabela thead tr {
+    background-color: #162030;
+}
+
+.dash-tabela th {
+    padding: 10px 14px;
+    text-align: left;
+    color: #aaa;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+.dash-tabela td {
+    padding: 10px 14px;
+    color: #ccc;
+    border-bottom: 1px solid #1a2a3a;
+}
+
+.dash-tabela tbody tr:hover {
+    background-color: #162030;
+}
+
+.linha-destaque td {
+    color: #d4b62c !important;
+    font-weight: 700;
 }
 
 /* ===== MURAL ===== */
@@ -465,58 +561,6 @@ body {
 .botao-deletar:hover {
     background-color: #990c19;
     color: white;
-}
-
-/* ===== TABELA ===== */
-
-.tabela-card {
-    background-color: #0d1b2a;
-    border-radius: 10px;
-    padding: 24px;
-}
-
-.tabela-card h3 {
-    font-size: 14px;
-    font-weight: 700;
-    color: #d4b62c;
-    margin: 0 0 20px 0;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.dash-tabela {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-}
-
-.dash-tabela thead tr {
-    background-color: #162030;
-}
-
-.dash-tabela th {
-    padding: 12px 16px;
-    text-align: left;
-    color: #aaa;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: 0.5px;
-}
-
-.dash-tabela td {
-    padding: 12px 16px;
-    color: #ccc;
-    border-bottom: 1px solid #1a2a3a;
-}
-
-.dash-tabela tbody tr:hover {
-    background-color: #162030;
-}
-
-.linha-destaque td {
-    color: #d4b62c !important;
-    font-weight: 700;
 }
 
 canvas {

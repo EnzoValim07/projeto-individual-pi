@@ -23,7 +23,7 @@
 
         <!-- Barra lateral -->
         <div class="header-left dash-header">
-            <h1>🤾 Handebol</h1>
+            <h1 class="titulo"><img src="../assets/imgs/fotoInicial.webp" class="logo-bola">Handebol</h1>
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
@@ -37,117 +37,120 @@
         <!-- Conteúdo principal -->
         <div class="dash">
 
-            <!-- ===== SEÇÃO: PERFIL ===== -->
-            <div class="dash-section">
-                <p class="dash-titulo">Meu Perfil</p>
+            <!-- ===== LINHA 1: PERFIL + RESULTADO DO QUIZ ===== -->
+            <div class="dash-linha">
 
-                <div class="perfil-grid">
-
-                    <div class="perfil-card">
-                        <div class="perfil-avatar" id="perfilAvatar">🤾</div>
-                        <div class="perfil-badge" id="perfilBadge">--</div>
-                        <div class="perfil-info">
-                            <div class="info-item">
-                                <span class="info-label">Nome</span>
-                                <span class="info-valor" id="infoNome">--</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">E-mail</span>
-                                <span class="info-valor" id="infoEmail">--</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Data do Quiz</span>
-                                <span class="info-valor" id="infoData">--</span>
-                            </div>
+                <!-- Meu Perfil -->
+                <div class="perfil-card">
+                    <p class="dash-titulo">Meu Perfil</p>
+                    <div class="perfil-avatar" id="perfilAvatar">🤾</div>
+                    <div class="perfil-badge" id="perfilBadge">--</div>
+                    <div class="perfil-info">
+                        <div class="info-item">
+                            <span class="info-label">Nome</span>
+                            <span class="info-valor" id="infoNome">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">E-mail</span>
+                            <span class="info-valor" id="infoEmail">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Data do Quiz</span>
+                            <span class="info-valor" id="infoData">--</span>
                         </div>
                     </div>
-
-                    <div class="perfil-kpis">
-                        <p class="dash-subtitulo">Resultado do Quiz</p>
-                        <div class="kpi-grid">
-                            <div class="kpi-card kpi-dourado">
-                                <span class="kpi-label">Pontuação</span>
-                                <span class="kpi-valor" id="kpiPontuacao">--</span>
-                                <span class="kpi-sub">de 5 possíveis</span>
-                            </div>
-                            <div class="kpi-card kpi-verde">
-                                <span class="kpi-label">Acertos</span>
-                                <span class="kpi-valor" id="kpiAcertos">--</span>
-                                <span class="kpi-sub">questões certas</span>
-                            </div>
-                            <div class="kpi-card kpi-vermelho">
-                                <span class="kpi-label">Erros</span>
-                                <span class="kpi-valor" id="kpiErros">--</span>
-                                <span class="kpi-sub">questões erradas</span>
-                            </div>
-                            <div class="kpi-card">
-                                <span class="kpi-label">Aproveitamento</span>
-                                <span class="kpi-valor" id="kpiAproveitamento">--</span>
-                                <span class="kpi-sub">% de acertos</span>
-                            </div>
-                        </div>
-
-                        <div class="grafico-card" style="margin-top: 20px;">
-                            <h3>Acertos x Erros</h3>
-                            <div style="max-width: 260px; margin: auto;">
-                                <canvas id="graficoPizza"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
+
+                <!-- Resultado do Quiz -->
+                <div class="resultado-card">
+                    <p class="dash-titulo">Resultado do Quiz</p>
+                    <div class="kpi-grid">
+                        <div class="kpi-card kpi-dourado">
+                            <span class="kpi-label">Pontuação</span>
+                            <span class="kpi-valor" id="kpiPontuacao">--</span>
+                            <span class="kpi-sub">de 5 possíveis</span>
+                        </div>
+                        <div class="kpi-card kpi-verde">
+                            <span class="kpi-label">Acertos</span>
+                            <span class="kpi-valor" id="kpiAcertos">--</span>
+                            <span class="kpi-sub">questões certas</span>
+                        </div>
+                        <div class="kpi-card kpi-vermelho">
+                            <span class="kpi-label">Erros</span>
+                            <span class="kpi-valor" id="kpiErros">--</span>
+                            <span class="kpi-sub">questões erradas</span>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-label">Aproveitamento</span>
+                            <span class="kpi-valor" id="kpiAproveitamento">--</span>
+                            <span class="kpi-sub">% de acertos</span>
+                        </div>
+                    </div>
+                    <p class="dash-titulo">Geral</p>
+                    <div class="kpi-grid" style="margin-top: 16px;">
+                        <div class="kpi-card">
+                            <span class="kpi-label">Total de Participantes</span>
+                            <span class="kpi-valor" id="kpiTotal">--</span>
+                            <span class="kpi-sub">usuários</span>
+                        </div>
+                        <div class="kpi-card kpi-dourado">
+                            <span class="kpi-label">Média Geral</span>
+                            <span class="kpi-valor" id="kpiMedia">--</span>
+                            <span class="kpi-sub">pontos em média</span>
+                        </div>
+                        <div class="kpi-card kpi-verde">
+                            <span class="kpi-label">Maior Pontuação</span>
+                            <span class="kpi-valor" id="kpiMaior">--</span>
+                            <span class="kpi-sub">pontos</span>
+                        </div>
+                        <div class="kpi-card kpi-vermelho">
+                            <span class="kpi-label">Menor Pontuação</span>
+                            <span class="kpi-valor" id="kpiMenor">--</span>
+                            <span class="kpi-sub">pontos</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- ===== SEÇÃO: RANKING ===== -->
-            <div class="dash-section">
-                <p class="dash-titulo">Ranking Geral</p>
+            <!-- ===== LINHA 2: ACERTOS X ERROS + RANKING ===== -->
+            <div class="dash-linha">
 
-                <div class="kpi-grid" style="margin-bottom: 24px;">
-                    <div class="kpi-card">
-                        <span class="kpi-label">Total de Participantes</span>
-                        <span class="kpi-valor" id="kpiTotal">--</span>
-                        <span class="kpi-sub">usuários</span>
-                    </div>
-                    <div class="kpi-card kpi-dourado">
-                        <span class="kpi-label">Média Geral</span>
-                        <span class="kpi-valor" id="kpiMedia">--</span>
-                        <span class="kpi-sub">pontos em média</span>
-                    </div>
-                    <div class="kpi-card kpi-verde">
-                        <span class="kpi-label">Maior Pontuação</span>
-                        <span class="kpi-valor" id="kpiMaior">--</span>
-                        <span class="kpi-sub">pontos</span>
-                    </div>
-                    <div class="kpi-card kpi-vermelho">
-                        <span class="kpi-label">Menor Pontuação</span>
-                        <span class="kpi-valor" id="kpiMenor">--</span>
-                        <span class="kpi-sub">pontos</span>
+                <div class="grafico-pizza-card">
+                    <p class="dash-titulo">Acertos x Erros</p>
+                    <div style="max-width: 280px; margin: auto;">
+                        <canvas id="graficoPizza"></canvas>
                     </div>
                 </div>
 
-                <div class="grafico-card" style="margin-bottom: 24px;">
-                    <h3>Pontuação por Usuário</h3>
-                    <canvas id="graficoBarras"></canvas>
+                <div class="ranking-card">
+                    <p class="dash-titulo">Ranking</p>
+                    <div class="grafico-card" style="margin-bottom: 20px;">
+                        <h3>Pontuação por Usuário</h3>
+                        <canvas id="graficoBarras"></canvas>
+                    </div>
+                    </div>
+
+            </div> <div class="tabela-card-total">
+                <h3>Todos os Resultados</h3>
+                <table class="dash-tabela">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Pontuação</th>
+                            <th>Acertos</th>
+                            <th>Erros</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaResultados">
+                        <tr><td colspan="6">Carregando...</td></tr>
+                    </tbody>
+                </table>
+             </div>
                 </div>
 
-                <div class="tabela-card">
-                    <h3>Todos os Resultados</h3>
-                    <table class="dash-tabela">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nome</th>
-                                <th>Pontuação</th>
-                                <th>Acertos</th>
-                                <th>Erros</th>
-                                <th>Data</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabelaResultados">
-                            <tr><td colspan="6">Carregando...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
 
         </div>
@@ -250,7 +253,7 @@
                     backgroundColor: "#d4b62c",
                     borderRadius: 6,
                     borderWidth: 0,
-                    barThickness: 80
+                    barThickness: 50
                 }]
             },
             options: {
