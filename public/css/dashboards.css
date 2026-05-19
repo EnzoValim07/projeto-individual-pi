@@ -319,8 +319,8 @@ body {
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 10px;
     padding: 20px;
-    height: 300px; /* Força uma altura fixa para o bloco do gráfico */
-    max-height: 350px; /* Garante que ele não passe disso de jeito nenhum */
+    height: 300px;
+    max-height: 350px;
 }
 
 .grafico-card h3 {
