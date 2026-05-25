@@ -21,6 +21,7 @@ var avisosRouter = require("./src/routes/avisos");
 var medidasRouter = require("./src/routes/medidas");
 var respostasRouter = require("./src/routes/respostas");
 var quizRouter = require("./src/routes/quiz");
+var perfisRouter = require("./src/routes/perfis");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -34,6 +35,7 @@ app.use("/avisos", avisosRouter);
 app.use("/medidas", medidasRouter);
 app.use("/respostas", respostasRouter);
 app.use("/quiz", quizRouter);
+app.use("/perfis", perfisRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

@@ -37,7 +37,6 @@
         <!-- Conteúdo principal -->
         <div class="dash">
 
-            <!-- ===== LINHA 1: PERFIL + RESULTADO DO QUIZ ===== -->
             <div class="dash-linha">
 
                 <!-- Meu Perfil -->
@@ -59,9 +58,20 @@
                             <span class="info-valor" id="infoData">--</span>
                         </div>
                     </div>
+
+                    <div style="margin-top: 16px; border-top: 1px solid #1a2a3a; padding-top: 16px;">
+                        <div class="info-item">
+                            <span class="info-label">Bio</span>
+                            <span class="info-valor" id="infoBio">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Nascimento</span>
+                            <span class="info-valor" id="infoNascimento">--</span>
+                        </div>
+                        <button class="botao" style="margin-top: 16px; width: 100%;" onclick="abrirEdicaoPerfil()">Editar Perfil</button>
+                    </div>
                 </div>
 
-                <!-- Resultado do Quiz -->
                 <div class="resultado-card">
                     <p class="dash-titulo">Resultado do Quiz</p>
                     <div class="kpi-grid">
@@ -113,7 +123,6 @@
 
             </div>
 
-            <!-- ===== LINHA 2: ACERTOS X ERROS + RANKING ===== -->
             <div class="dash-linha">
 
                 <div class="grafico-pizza-card">
@@ -129,9 +138,11 @@
                         <h3>Pontuação por Usuário</h3>
                         <canvas id="graficoBarras"></canvas>
                     </div>
-                    </div>
+                </div>
 
-            </div> <div class="tabela-card-total">
+            </div>
+
+            <div class="tabela-card-total">
                 <h3>Todos os Resultados</h3>
                 <table class="dash-tabela">
                     <thead>
@@ -148,13 +159,34 @@
                         <tr><td colspan="6">Carregando...</td></tr>
                     </tbody>
                 </table>
-             </div>
-                </div>
-
             </div>
 
         </div>
     </div>
+
+    <!-- ===== MODAL EDIÇÃO DE PERFIL 1:1 ===== -->
+    <div id="modalPerfil" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+         background:rgba(0,0,0,0.7); z-index:999; justify-content:center; align-items:center;">
+        <div style="background:#0d1b2a; border:1px solid #1a2a3a; border-radius:12px; padding:32px; width:100%; max-width:420px;">
+            <h3 style="color:#d4b62c; margin-bottom:20px;">Editar Perfil</h3>
+            <div style="margin-bottom:12px;">
+                <span style="color:#aaa; display:block; margin-bottom:6px;">Bio (máx. 250 caracteres):</span>
+                <textarea id="input_bio" maxlength="250" rows="3" placeholder="Fale um pouco sobre você..."
+                    style="width:100%; background:#1a2a3a; border:1px solid #2a3a4a; color:#fff; border-radius:8px; padding:8px; box-sizing:border-box;"></textarea>
+            </div>
+            <div style="margin-bottom:20px;">
+                <span style="color:#aaa; display:block; margin-bottom:6px;">Data de Nascimento:</span>
+                <input id="input_nascimento" type="date"
+                    style="width:100%; background:#1a2a3a; border:1px solid #2a3a4a; color:#fff; border-radius:8px; padding:8px; box-sizing:border-box;" />
+            </div>
+            <div style="display:flex; gap:12px;">
+                <button class="botao" onclick="salvarPerfil()">Salvar</button>
+                <button class="botao" style="background:transparent; border:2px solid #d4b62c; color:#d4b62c;"
+                    onclick="fecharEdicaoPerfil()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <!-- ===== FIM MODAL ===== -->
 
 </body>
 </html>
@@ -178,6 +210,9 @@
                 preencherRanking(dados);
             })
             .catch(erro => console.log("Erro ao carregar quiz: ", erro));
+
+        // ===== CARREGA PERFIL 1:1 =====
+        carregarPerfil();
     }
 
     function preencherPerfil(dados) {
@@ -281,6 +316,80 @@
                     "<td>" + item.erros + "</td>" +
                     "<td>" + data.toLocaleDateString("pt-BR") + "</td>" +
                 "</tr>";
+        });
+    }
+
+    // ===== FUNÇÕES DO PERFIL 1:1 =====
+
+    function carregarPerfil() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        fetch("/perfis/buscar/" + idUsuario)
+            .then(function (res) {
+                if (res.status === 204) {
+                    criarPerfilVazio(idUsuario);
+                    return null;
+                }
+                return res.json();
+            })
+            .then(function (perfil) {
+                if (!perfil) return;
+                document.getElementById("infoBio").innerHTML = perfil.bio && perfil.bio !== "" ? perfil.bio : "Sem bio cadastrada.";
+                var dataNasc = perfil.data_nascimento ? new Date(perfil.data_nascimento).toLocaleDateString("pt-BR") : "--";
+                document.getElementById("infoNascimento").innerHTML = dataNasc;
+            })
+            .catch(function (erro) {
+                console.log("Erro ao carregar perfil: ", erro);
+            });
+    }
+
+    function criarPerfilVazio(idUsuario) {
+        fetch("/perfis/cadastrar/" + idUsuario, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ bioServer: "", dataNascimentoServer: "2000-01-01" })
+        }).catch(function (erro) {
+            console.log("Erro ao criar perfil vazio: ", erro);
+        });
+    }
+
+    function abrirEdicaoPerfil() {
+        document.getElementById("modalPerfil").style.display = "flex";
+    }
+
+    function fecharEdicaoPerfil() {
+        document.getElementById("modalPerfil").style.display = "none";
+    }
+
+    function salvarPerfil() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+        var bio = document.getElementById("input_bio").value;
+        var dataNascimento = document.getElementById("input_nascimento").value;
+
+        if (dataNascimento === "") {
+            alert("Preencha a data de nascimento!");
+            return;
+        }
+
+        fetch("/perfis/editar/" + idUsuario, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                bioServer: bio,
+                dataNascimentoServer: dataNascimento
+            })
+        })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                alert("Perfil atualizado com sucesso!");
+                fecharEdicaoPerfil();
+                carregarPerfil();
+            } else {
+                alert("Erro ao atualizar o perfil!");
+            }
+        })
+        .catch(function (erro) {
+            console.log("Erro ao salvar perfil: ", erro);
         });
     }
 
