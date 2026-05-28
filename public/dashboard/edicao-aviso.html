@@ -84,7 +84,6 @@
             return;
         }
 
-        // Buscar todos os avisos e filtrar pelo ID
         fetch("/avisos/listar")
             .then(res => res.json())
             .then(function (avisos) {

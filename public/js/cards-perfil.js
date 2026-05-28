@@ -1,13 +1,9 @@
-// ── PERFIL (1:1) ─────────────────────────────────────────────
-// Chamar carregarPerfil() dentro da função iniciarDashboard() que já existe
-
 function carregarPerfil() {
     var idUsuario = sessionStorage.ID_USUARIO;
 
     fetch("/perfis/buscar/" + idUsuario)
         .then(function (res) {
             if (res.status === 204) {
-                // Usuário ainda não tem perfil — cria um vazio
                 criarPerfilVazio(idUsuario);
                 return;
             }

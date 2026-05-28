@@ -576,8 +576,6 @@ body {
   display: none
 }
 
-/* FORMULARIO */
-
 .alerta_erro{
   display: flex;
   justify-content: flex-end;
@@ -688,7 +686,6 @@ input {
   100% {transform: rotate(25deg)}
 }
 
-/* ==================== QUIZ ==================== */
 
 .quiz-wrapper {
   min-height: var(--tamanho-login);
@@ -755,7 +752,6 @@ input {
   color: #d4b62c;
 }
 
-/* Área do jogo */
 #jogo {
   background-color: #fff;
   border-radius: 10px;
@@ -828,7 +824,6 @@ input {
   margin: 0;
 }
 
-/* Botões do quiz */
 #botoes {
   display: flex;
   flex-direction: row !important;
@@ -862,7 +857,6 @@ input {
   cursor: not-allowed;
 }
 
-/* Botão iniciar */
 #btnIniciarQuiz {
   width: 160px !important;
   height: 44px !important;
@@ -871,7 +865,6 @@ input {
   margin-top: 0 !important;
 }
 
-/* Cores de feedback */
 .text-success-with-bg {
   color: #095c36 !important;
   background-color: #9dd3ba !important;
@@ -897,7 +890,6 @@ input {
   color: #aaa !important;
 }
 
-/* Mensagem final */
 #msgFinal {
   font-size: 16px;
   font-weight: 600;

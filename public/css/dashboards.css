@@ -6,7 +6,6 @@ body {
     font-family: 'Barlow', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ===== LAYOUT GERAL ===== */
 
 .janela {
     display: flex;
@@ -58,7 +57,6 @@ body {
     color: #d4b62c;
 }
 
-/* Botões da barra lateral */
 .btn-nav {
     width: 60%;
     color: white;
@@ -127,7 +125,6 @@ body {
     font-size: 15px;
 }
 
-/* ===== ÁREA PRINCIPAL ===== */
 
 .dash {
     width: 80%;
@@ -145,7 +142,6 @@ body {
     gap: 24px;
 }
 
-/* ===== LINHAS DO LAYOUT ===== */
 
 .dash-linha {
     display: flex;
@@ -153,7 +149,6 @@ body {
     align-items: stretch;
 }
 
-/* ===== TÍTULOS ===== */
 
 .dash-titulo {
     font-size: 16px;
@@ -176,7 +171,6 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* ===== CARD PERFIL (linha 1 esquerda) ===== */
 
 .perfil-card {
     background-color: rgba(8, 16, 24, 0.75);
@@ -215,7 +209,6 @@ body {
     width: 100%;
 }
 
-/* ===== CARD RESULTADO DO QUIZ (linha 1 direita) ===== */
 
 .resultado-card {
     background-color: rgba(8, 16, 24, 0.75);
@@ -226,7 +219,6 @@ body {
     box-sizing: border-box;
 }
 
-/* ===== CARD GRÁFICO PIZZA (linha 2 esquerda) ===== */
 
 .grafico-pizza-card {
     background-color: rgba(8, 16, 24, 0.75);
@@ -238,7 +230,6 @@ body {
     box-sizing: border-box;
 }
 
-/* ===== CARD RANKING (linha 2 direita) ===== */
 
 .ranking-card {
     background-color: rgba(8, 16, 24, 0.75);
@@ -270,7 +261,6 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* ===== KPI CARDS ===== */
 
 .kpi-grid {
     display: grid;
@@ -312,7 +302,6 @@ body {
     color: #555;
 }
 
-/* ===== GRÁFICO CARD ===== */
 
 .grafico-card {
     background-color: rgba(8, 16, 24, 0.45);
@@ -332,7 +321,6 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* ===== INFO ITEMS ===== */
 
 .info-item {
     display: flex;
@@ -407,7 +395,6 @@ body {
     font-weight: 700;
 }
 
-/* ===== MURAL ===== */
 
 .mural-form {
     background-color: #0d1b2a;
