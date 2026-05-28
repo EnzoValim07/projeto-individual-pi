@@ -38,6 +38,14 @@ CREATE TABLE aviso (
     CONSTRAINT fk_usuario_aviso FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
 );
 
+CREATE TABLE perfil (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    bio VARCHAR(250),
+    data_nascimento DATE,
+    fk_usuario INT UNIQUE,
+    CONSTRAINT fk_perfil_usuario FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+);
+
 select * from usuario;
 
 SELECT u.nome, u.email, r.descricao AS conhece_handebol
@@ -45,3 +53,4 @@ FROM usuario u
 JOIN respostaInicial r ON u.conhece = r.id_resposta;
 
 select * from resultado_quiz;
+select * from perfil;
