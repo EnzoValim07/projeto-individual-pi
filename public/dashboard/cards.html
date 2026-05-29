@@ -227,15 +227,15 @@
         var badge = "";
         var avatar = "🤾";
         if (aproveitamento <= 30) {
-            badge = "🌱 Iniciante";
+            badge = "Iniciante";
         } else if (aproveitamento <= 50) {
-            badge = "📚 Aprendiz";
+            badge = "Aprendiz";
         } else if (aproveitamento <= 80) {
-            badge = "⭐ Torcedor";
+            badge = "Torcedor";
         } else if (aproveitamento < 100) {
-            badge = "🏅 Atleta";
+            badge = "Atleta";
         } else {
-            badge = "🏆 Craque!";
+            badge = "Craque";
             avatar = "🏆";
         }
         document.getElementById("perfilBadge").innerHTML = badge;
