@@ -128,9 +128,9 @@
   }
 
   function cadastrar() {
-    var nomeVar = nome_input.value;
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
+    var nomeVar = nome_input.value.trim();
+    var emailVar = email_input.value.trim();
+    var senhaVar = senha_input.value.trim();
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
     var conheceVar = document.getElementById('conhece_handebol').value;
 
