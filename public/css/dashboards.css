@@ -187,8 +187,25 @@ body {
 }
 
 .perfil-avatar {
-    font-size: 56px;
-    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.perfil-avatar img {
+    width: 90px;
+    height: 90px;
+
+    filter:
+        brightness(0)
+        saturate(100%)
+        invert(78%)
+        sepia(87%)
+        saturate(1165%)
+        hue-rotate(359deg)
+        brightness(103%)
+        contrast(104%);
 }
 
 .perfil-badge {
